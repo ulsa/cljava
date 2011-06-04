@@ -1,4 +1,4 @@
-package com.jayway.clojureds;
+package com.jayway.cljava;
 
 import static clojure.lang.LockingTransaction.runInTransaction;
 import static clojure.lang.Numbers.dec;

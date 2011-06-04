@@ -1,16 +1,14 @@
-package com.jayway.clojureds;
-
+package com.jayway.cljava;
 
 import static clojure.lang.RT.list;
 import static clojure.lang.RT.vector;
-import static com.jayway.clojureds.Ants.behave;
-import static com.jayway.clojureds.Ants.evaporate;
-import static com.jayway.clojureds.Ants.place;
-import static com.jayway.clojureds.Ants.rank_by;
-import static com.jayway.clojureds.Core.dosync;
-import static com.jayway.clojureds.Core.keyword;
-import static com.jayway.clojureds.Core.rand_int;
-import static org.junit.Assert.*;
+import static com.jayway.cljava.Ants.behave;
+import static com.jayway.cljava.Ants.evaporate;
+import static com.jayway.cljava.Ants.place;
+import static com.jayway.cljava.Ants.rank_by;
+import static com.jayway.cljava.Core.dosync;
+import static com.jayway.cljava.Core.keyword;
+import static com.jayway.cljava.Core.rand_int;
 
 import org.junit.Before;
 import org.junit.Test;

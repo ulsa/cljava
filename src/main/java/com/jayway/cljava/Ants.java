@@ -1,4 +1,4 @@
-package com.jayway.clojureds;
+package com.jayway.cljava;
 
 import static clojure.lang.Numbers.add;
 import static clojure.lang.Numbers.dec;
@@ -26,17 +26,17 @@ import static clojure.lang.RT.second;
 import static clojure.lang.RT.seq;
 import static clojure.lang.RT.third;
 import static clojure.lang.RT.vector;
-import static com.jayway.clojureds.Core.agent;
-import static com.jayway.clojureds.Core.dosync;
-import static com.jayway.clojureds.Core.keyword;
-import static com.jayway.clojureds.Core.map;
-import static com.jayway.clojureds.Core.merge_with;
-import static com.jayway.clojureds.Core.min;
-import static com.jayway.clojureds.Core.rand_int;
-import static com.jayway.clojureds.Core.reduce;
-import static com.jayway.clojureds.Core.send_off;
-import static com.jayway.clojureds.Core.sort_by;
-import static com.jayway.clojureds.Core.vec;
+import static com.jayway.cljava.Core.agent;
+import static com.jayway.cljava.Core.dosync;
+import static com.jayway.cljava.Core.keyword;
+import static com.jayway.cljava.Core.map;
+import static com.jayway.cljava.Core.merge_with;
+import static com.jayway.cljava.Core.min;
+import static com.jayway.cljava.Core.rand_int;
+import static com.jayway.cljava.Core.reduce;
+import static com.jayway.cljava.Core.send_off;
+import static com.jayway.cljava.Core.sort_by;
+import static com.jayway.cljava.Core.vec;
 
 import java.util.Iterator;
 
@@ -244,9 +244,11 @@ public class Ants {
 					p.alter(assocSingle, list(keyword("food"), rand_int(food_range)));
 				}
 				IPersistentCollection ants = list();
-				for (Iterator<Integer> xIter = home_range.iterator(); xIter.hasNext();) {
+				for (@SuppressWarnings("unchecked")
+				Iterator<Integer> xIter = home_range.iterator(); xIter.hasNext();) {
 					int x = xIter.next();
-					for (Iterator<Integer> yIter = home_range.iterator(); yIter.hasNext();) {
+					for (@SuppressWarnings("unchecked")
+					Iterator<Integer> yIter = home_range.iterator(); yIter.hasNext();) {
 						int y = yIter.next();
 						Ref p = place(vector(x, y));
 						p.alter(assocSingle, list(keyword("home"), true));
