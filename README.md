@@ -1,0 +1,1 @@
+This project provides a Java-friendly API to Clojure. It means that functions such as map, reduce, filter, partition, merge-with, conj, etc are available as static Java functions. They were written during the development of a Java version of the ants demo, which is also available in this project.
