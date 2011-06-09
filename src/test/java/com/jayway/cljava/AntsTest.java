@@ -1,7 +1,6 @@
 package com.jayway.cljava;
 
 import static clojure.lang.RT.list;
-import static clojure.lang.RT.vector;
 import static com.jayway.cljava.Ants.behave;
 import static com.jayway.cljava.Ants.evaporate;
 import static com.jayway.cljava.Ants.place;
@@ -14,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import clojure.lang.AFn;
+import clojure.lang.RT;
 import clojure.lang.Ref;
 
 public class AntsTest {
@@ -31,16 +31,16 @@ public class AntsTest {
 			public Object invoke(Object p) throws Exception {
 				return Ants.derefGet((Ref) p, keyword("pher"));
 			}
-		}, list(place(vector(0,0)), place(vector(79,79)))));
+		}, list(place(RT.vector(0,0)), place(RT.vector(79,79)))));
 	}
 	
 	@Test
 	public void evaporateShouldDecreaseOneToPoint99() throws Exception {
 		// test evaporation
 		System.out.println("test evaporation");
-		System.out.println(place(vector(79,79)).deref());
+		System.out.println(place(RT.vector(79,79)).deref());
 		evaporate();
-		System.out.println(place(vector(79,79)).deref());
+		System.out.println(place(RT.vector(79,79)).deref());
 	}
 
 	@Test
@@ -48,9 +48,9 @@ public class AntsTest {
 		
 		// test behave
 		System.out.println("test behave");
-		System.out.println(place(vector(0,0)).deref());
-		System.out.println(place(behave(vector(0,0))).deref());
-		System.out.println(place(behave(vector(0,0))).deref());
+		System.out.println(place(RT.vector(0,0)).deref());
+		System.out.println(place(behave(RT.vector(0,0))).deref());
+		System.out.println(place(behave(RT.vector(0,0))).deref());
 
 	}
 	
@@ -58,16 +58,16 @@ public class AntsTest {
 	public void stuff() throws Exception {
 		dosync(new AFn() {
 			public Object invoke() throws Exception {
-				Ref p = place(vector(0, 0));
-				p.alter(Ants.assocSingle, list(keyword("food"), rand_int(Ants.food_range)));
-				System.out.println(vector(0, 0) + " now has " + p.deref());
-				Ants.create_ant(vector(79, 79), 3);
-				System.out.println(Ants.move(vector(79, 79)));
-				System.out.println(place(vector(0, 0)).deref());
-				System.out.println(Ants.take_food(vector(0, 0)));
-				System.out.println(place(vector(0, 0)).deref());
-				System.out.println(Ants.drop_food(vector(0, 0)));
-				System.out.println(place(vector(0, 0)).deref());
+				Ref p = place(RT.vector(0, 0));
+				p.alter(Core.assocSingle, list(keyword("food"), rand_int(Ants.food_range)));
+				System.out.println(RT.vector(0, 0) + " now has " + p.deref());
+				Ants.create_ant(RT.vector(79, 79), 3);
+				System.out.println(Ants.move(RT.vector(79, 79)));
+				System.out.println(place(RT.vector(0, 0)).deref());
+				System.out.println(Ants.take_food(RT.vector(0, 0)));
+				System.out.println(place(RT.vector(0, 0)).deref());
+				System.out.println(Ants.drop_food(RT.vector(0, 0)));
+				System.out.println(place(RT.vector(0, 0)).deref());
 				return null;
 			};
 		});

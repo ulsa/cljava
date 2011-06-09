@@ -1,6 +1,7 @@
 package com.jayway.cljava;
 
 import static clojure.lang.LockingTransaction.runInTransaction;
+import static clojure.lang.Numbers.add;
 import static clojure.lang.Numbers.dec;
 import static clojure.lang.Numbers.equiv;
 import static clojure.lang.Numbers.gt;
@@ -9,6 +10,7 @@ import static clojure.lang.Numbers.lt;
 import static clojure.lang.RT.assoc;
 import static clojure.lang.RT.cons;
 import static clojure.lang.RT.count;
+import static clojure.lang.RT.dissoc;
 import static clojure.lang.RT.first;
 import static clojure.lang.RT.list;
 import static clojure.lang.RT.more;
@@ -39,6 +41,7 @@ import clojure.lang.Util;
  * <li>filter
  * <li>map
  * <li>reduce
+ * <li>range
  * <li>conj
  * <li>partition
  * <li>drop
@@ -402,6 +405,53 @@ public class Core {
 		}
 	}
 
+	//  (defn range 
+	//	  "Returns a lazy seq of nums from start (inclusive) to end
+	//	  (exclusive), by step, where start defaults to 0, step to 1, and end
+	//	  to infinity."
+	//	  {:added "1.0"}
+	//	  ([] (range 0 Double/POSITIVE_INFINITY 1))
+	//	  ([end] (range 0 end 1))
+	//	  ([start end] (range start end 1))
+	//	  ([start end step]
+	//	   (lazy-seq
+	//	    (let [b (chunk-buffer 32)
+	//	          comp (if (pos? step) < >)]
+	//	      (loop [i start]
+	//	        (if (and (< (count b) 32)
+	//	                 (comp i end))
+	//	          (do
+	//	            (chunk-append b i)
+	//	            (recur (+ i step)))
+	//	          (chunk-cons (chunk b) 
+	//	                      (when (comp i end) 
+	//	                        (range i end step)))))))))
+    public static ISeq range() {
+    	return range(0, Double.POSITIVE_INFINITY, 1);
+    }
+    public static ISeq range(Number end) {
+    	return range(0, end, 1);
+    }
+    public static ISeq range(Number start, Number end) {
+    	return range(start, end, 1);
+    }
+    public static ISeq range(Number start, Number end, Number step) {
+    	IPersistentCollection range = RT.vector();
+    	for (Number i = start;;i = add(i, step)) {
+    		if (isPos(step)) {
+    			if (lt(i, end))
+    				range = conj(range, i);
+    			else
+    				return seq(range);
+    		} else {
+    			if (gt(i, end))
+    				range = conj(range, i);
+    			else
+    				return seq(range);
+    		}
+    	}
+    }
+
 	//    (defn sort
 	//	  "Returns a sorted sequence of the items in coll. If no comparator is
 	//	  supplied, uses compare. comparator must
@@ -757,4 +807,30 @@ public class Core {
     		return seq(s.first());
     	return cons(s.first(), spread(s.next()));
     }
+
+	public static final AFn addTwo = new AFn() {
+		@Override
+		public Object invoke(Object arg1, Object arg2) throws Exception {
+			return add(arg1, arg2);
+		}
+	};
+	public static final AFn assocTwo = new AFn() {
+		@Override
+		public Object invoke(Object m, Object key1, Object val1, Object key2, Object val2) throws Exception {
+			m = assoc(m, key1, val1);
+			return assoc(m, key2, val2);
+		}
+	};
+	public static final AFn assocSingle = new AFn() {
+		@Override
+		public Object invoke(Object m, Object key, Object val) throws Exception {
+			return assoc(m, key, val);
+		}
+	};
+	public static final AFn dissocSingle = new AFn() {
+		@Override
+		public Object invoke(Object m, Object key) throws Exception {
+			return dissoc(m, key);
+		}
+	};
 }

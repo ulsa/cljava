@@ -26,7 +26,11 @@ import static clojure.lang.RT.second;
 import static clojure.lang.RT.seq;
 import static clojure.lang.RT.third;
 import static clojure.lang.RT.vector;
+import static com.jayway.cljava.Core.addTwo;
 import static com.jayway.cljava.Core.agent;
+import static com.jayway.cljava.Core.assocSingle;
+import static com.jayway.cljava.Core.assocTwo;
+import static com.jayway.cljava.Core.dissocSingle;
 import static com.jayway.cljava.Core.dosync;
 import static com.jayway.cljava.Core.keyword;
 import static com.jayway.cljava.Core.map;
@@ -69,35 +73,6 @@ import javax.swing.JFrame;
  * @author Ulrik Sandberg
  */
 public class Ants {
-
-	public static final AFn addTwo = new AFn() {
-		@Override
-		public Object invoke(Object arg1, Object arg2) throws Exception {
-			return add(arg1, arg2);
-		}
-	};
-
-	public static final AFn assocTwo = new AFn() {
-		@Override
-		public Object invoke(Object m, Object key1, Object val1, Object key2, Object val2) throws Exception {
-			m = assoc(m, key1, val1);
-			return assoc(m, key2, val2);
-		}
-	};
-
-	public static final AFn assocSingle = new AFn() {
-		@Override
-		public Object invoke(Object m, Object key, Object val) throws Exception {
-			return assoc(m, key, val);
-		}
-	};
-
-	public static final AFn dissocSingle = new AFn() {
-		@Override
-		public Object invoke(Object m, Object key) throws Exception {
-			return dissoc(m, key);
-		}
-	};
 
 	// dimensions of square world
 	private static final int dim = 80;
