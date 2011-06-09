@@ -47,7 +47,6 @@ public class RectangularGrid {
 		System.out.println("> countRectangles(592, 964)"); time(callCountRectangles(592, 964));
 		System.out.println("> countRectangles(1000, 1000)"); time(callCountRectangles(1000, 1000));
 		System.out.println("> countRectangles(2000, 2000)"); time(callCountRectangles(2000, 2000));
-		System.out.println("> countRectangles(10000, 10000)"); time(callCountRectangles(10000, 10000));
 	}
 	
 	static IFn callCountRectangles(final int width, final int height) {
