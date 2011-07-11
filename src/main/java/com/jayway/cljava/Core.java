@@ -38,20 +38,30 @@ import clojure.lang.Util;
 /**
  * Useful Clojure functions implemented in Java.
  * <ul>
+ * <li>agent
+ * <li>apply
+ * <li>conj
+ * <li>dosync
+ * <li>drop
+ * <li>every? (isEvery)
  * <li>filter
  * <li>map
- * <li>reduce
- * <li>range
- * <li>conj
- * <li>partition
- * <li>drop
- * <li>take
  * <li>max
+ * <li>merge-with (merge_with)
  * <li>min
- * <li>apply
+ * <li>partition
+ * <li>rand-int (rand_int)
+ * <li>range
+ * <li>reduce
+ * <li>some
+ * <li>sort
+ * <li>sort-by (sort_by)
+ * <li>take
+ * <li>vec
  * <li>list*
  * </ul>
  *
+ * TODO chunked sequences
  * @author Ulrik Sandberg
  */
 public class Core {
